@@ -1,0 +1,11 @@
+# Set the default behavior, in case people don't have core.autocrlf set.
+*text=auto
+
+# Declare files that will always have LF line endings on checkout.
+*.exp text eol=lf
+*.S text eol=lf
+*.c text eol=lf
+*.h text eol=lf
+*.py text eol=lf
+*.yml text eol=lf
+*.json text eol=lf
