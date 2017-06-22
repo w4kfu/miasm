@@ -35,6 +35,8 @@ class MessageClose(Message):
     "Close the channel"
     pass
 
+def _worker(t, todo_queue, message_queue, init_args):
+    t.worker(todo_queue, message_queue, init_args)
 
 class TestSet(object):
 
@@ -225,10 +227,12 @@ class TestSet(object):
         # Launch workers
         processes = []
         for _ in xrange(self.cpu_c):
-            p = Process(target=TestSet.worker, args=(self.todo_queue,
+            #p = Process(target=TestSet.worker, args=(self.todo_queue,
+            #                                         self.message_queue,
+            #                                         self.additional_args))
+            p = Process(target=_worker, args=(TestSet, self.todo_queue,
                                                      self.message_queue,
                                                      self.additional_args))
-
             processes.append(p)
             p.start()
 
