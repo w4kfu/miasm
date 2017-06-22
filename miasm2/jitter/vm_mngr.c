@@ -616,7 +616,7 @@ int vm_read_mem(vm_mngr_t* vm_mngr, uint64_t addr, char** buffer_ptr, uint64_t s
 	      }
 
 	      len = MIN(size, mpn->size - (addr - mpn->ad));
-	      memcpy(buffer, (char*)(mpn->ad_hp + (addr - mpn->ad)), len);
+	      memcpy(buffer, (char*)((char*)mpn->ad_hp + (addr - mpn->ad)), len);
 	      buffer += len;
 	      addr += len;
 	      size -= len;
@@ -639,7 +639,7 @@ int vm_write_mem(vm_mngr_t* vm_mngr, uint64_t addr, char *buffer, uint64_t size)
 	      }
 
 	      len = MIN(size, mpn->size - (addr - mpn->ad));
-	      memcpy(mpn->ad_hp + (addr-mpn->ad), buffer, len);
+	      memcpy((char*)mpn->ad_hp + (addr-mpn->ad), buffer, len);
 	      buffer += len;
 	      addr += len;
 	      size -= len;
@@ -1219,6 +1219,7 @@ double fsqrt(double a)
 	return b;
 }
 
+#ifndef _WIN32 /* Temporary fix */
 double fabs(double a)
 {
 	double b;
@@ -1229,6 +1230,7 @@ double fabs(double a)
 #endif
 	return b;
 }
+#endif
 
 double fprem(double a, double b)
 {

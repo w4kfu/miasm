@@ -54,42 +54,42 @@ PyObject * JitCpu_set_jitter(JitCpu *self, PyObject *value, void *closure)
 	return 0;
 }
 
-uint8_t __attribute__((weak)) MEM_LOOKUP_08(JitCpu* jitcpu, uint64_t addr)
+_MIASM_WEAK uint8_t MEM_LOOKUP_08(JitCpu* jitcpu, uint64_t addr)
 {
 	return vm_MEM_LOOKUP_08(&(jitcpu->pyvm->vm_mngr), addr);
 }
 
-uint16_t __attribute__((weak)) MEM_LOOKUP_16(JitCpu* jitcpu, uint64_t addr)
+_MIASM_WEAK uint16_t MEM_LOOKUP_16(JitCpu* jitcpu, uint64_t addr)
 {
 	return vm_MEM_LOOKUP_16(&(jitcpu->pyvm->vm_mngr), addr);
 }
 
-uint32_t __attribute__((weak)) MEM_LOOKUP_32(JitCpu* jitcpu, uint64_t addr)
+_MIASM_WEAK uint32_t MEM_LOOKUP_32(JitCpu* jitcpu, uint64_t addr)
 {
 	return vm_MEM_LOOKUP_32(&(jitcpu->pyvm->vm_mngr), addr);
 }
 
-uint64_t __attribute__((weak)) MEM_LOOKUP_64(JitCpu* jitcpu, uint64_t addr)
+_MIASM_WEAK uint64_t MEM_LOOKUP_64(JitCpu* jitcpu, uint64_t addr)
 {
 	return vm_MEM_LOOKUP_64(&(jitcpu->pyvm->vm_mngr), addr);
 }
 
-void __attribute__((weak)) MEM_WRITE_08(JitCpu* jitcpu, uint64_t addr, uint8_t src)
+_MIASM_WEAK void MEM_WRITE_08(JitCpu* jitcpu, uint64_t addr, uint8_t src)
 {
 	vm_MEM_WRITE_08(&((VmMngr*)jitcpu->pyvm)->vm_mngr, addr, src);
 }
 
-void __attribute__((weak)) MEM_WRITE_16(JitCpu* jitcpu, uint64_t addr, uint16_t src)
+_MIASM_WEAK void MEM_WRITE_16(JitCpu* jitcpu, uint64_t addr, uint16_t src)
 {
 	vm_MEM_WRITE_16(&((VmMngr*)jitcpu->pyvm)->vm_mngr, addr, src);
 }
 
-void __attribute__((weak)) MEM_WRITE_32(JitCpu* jitcpu, uint64_t addr, uint32_t src)
+_MIASM_WEAK void MEM_WRITE_32(JitCpu* jitcpu, uint64_t addr, uint32_t src)
 {
 	vm_MEM_WRITE_32(&((VmMngr*)jitcpu->pyvm)->vm_mngr, addr, src);
 }
 
-void __attribute__((weak)) MEM_WRITE_64(JitCpu* jitcpu, uint64_t addr, uint64_t src)
+_MIASM_WEAK void MEM_WRITE_64(JitCpu* jitcpu, uint64_t addr, uint64_t src)
 {
 	vm_MEM_WRITE_64(&((VmMngr*)jitcpu->pyvm)->vm_mngr, addr, src);
 }
@@ -97,7 +97,7 @@ void __attribute__((weak)) MEM_WRITE_64(JitCpu* jitcpu, uint64_t addr, uint64_t 
 
 
 
-PyObject* __attribute__((weak)) vm_get_mem(JitCpu *self, PyObject* args)
+_MIASM_WEAK PyObject* vm_get_mem(JitCpu *self, PyObject* args)
 {
        PyObject *py_addr;
        PyObject *py_len;

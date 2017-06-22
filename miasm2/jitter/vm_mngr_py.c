@@ -75,7 +75,9 @@ static void sig_alarm(int signo)
 PyObject* set_alarm(VmMngr* self)
 {
 	global_vmmngr = self;
+#ifndef _WIN32 /* Temporary fix */
 	signal(SIGALRM, sig_alarm);
+#endif
 
 	Py_INCREF(Py_None);
 	return Py_None;
@@ -550,7 +552,11 @@ PyObject* vm_get_memory_write(VmMngr* self, PyObject* args)
 static PyObject *
 vm_set_big_endian(VmMngr *self, PyObject *value, void *closure)
 {
-	self->vm_mngr.sex   = __BIG_ENDIAN;
+#if _WIN32
+    self->vm_mngr.sex   = _BIG_ENDIAN;  /* defined in vm_mngr.h */
+#else
+    self->vm_mngr.sex   = __BIG_ENDIAN;
+#endif
 	Py_INCREF(Py_None);
 	return Py_None;
 }
@@ -558,7 +564,11 @@ vm_set_big_endian(VmMngr *self, PyObject *value, void *closure)
 static PyObject *
 vm_set_little_endian(VmMngr *self, PyObject *value, void *closure)
 {
-	self->vm_mngr.sex   = __LITTLE_ENDIAN;
+#if _WIN32
+    self->vm_mngr.sex   = _LITTLE_ENDIAN;  /* defined in vm_mngr.h */
+#else
+    self->vm_mngr.sex   = __LITTLE_ENDIAN;
+#endif
 	Py_INCREF(Py_None);
 	return Py_None;
 }

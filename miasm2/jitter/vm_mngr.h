@@ -24,6 +24,14 @@
 #define __BYTE_ORDER _BYTE_ORDER
 #define __BIG_ENDIAN _BIG_ENDIAN
 #define __LITTLE_ENDIAN _LITTLE_ENDIAN
+#elif _WIN32
+#define _LITTLE_ENDIAN      1234
+#define _BIG_ENDIAN         4321
+#if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
+#define __BYTE_ORDER _LITTLE_ENDIAN
+#else
+#define __BYTE_ORDER _BIG_ENDIAN
+#endif
 #endif
 
 #define Endian16_Swap(value) \

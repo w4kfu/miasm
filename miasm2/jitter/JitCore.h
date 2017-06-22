@@ -1,6 +1,14 @@
 #ifndef JITCORE_H
 #define JITCORE_H
 
+#if _WIN32
+#define _MIASM_WEAK __declspec(noinline) __inline
+#define _MIASM_EXTERN __declspec(dllexport)
+#else
+#define _MIASM_WEAK  __attribute__((weak))
+#define _MIASM_EXTERN
+#endif
+
 #define RAISE(errtype, msg) {PyObject* p; p = PyErr_Format( errtype, msg ); return p;}
 #define RAISE_ret0(errtype, msg) {PyObject* p; p = PyErr_Format( errtype, msg ); return 0;}
 
@@ -126,7 +134,7 @@ void MEM_WRITE_08(JitCpu* jitcpu, uint64_t addr, uint8_t src);
 void MEM_WRITE_16(JitCpu* jitcpu, uint64_t addr, uint16_t src);
 void MEM_WRITE_32(JitCpu* jitcpu, uint64_t addr, uint32_t src);
 void MEM_WRITE_64(JitCpu* jitcpu, uint64_t addr, uint64_t src);
-PyObject* vm_get_mem(JitCpu *self, PyObject* args);
+_MIASM_EXTERN PyObject* vm_get_mem(JitCpu *self, PyObject* args);
 
 
 
