@@ -83,9 +83,12 @@ def buil_all():
         Extension("miasm2.jitter.Jitgcc",
                   ["miasm2/jitter/Jitgcc.c"]),
         Extension("miasm2.jitter.Jittcc",
-                  ["miasm2/jitter/Jittcc.c"],
-                  libraries=["tcc"])
-        ]
+                    include_dirs = ['miasm2/jitter/libtcc'],
+                    libraries = ['libtcc_x64'],
+                    library_dirs = ['miasm2/jitter/libtcc'],
+                    sources = ["miasm2/jitter/Jittcc.c"]
+                    )
+        ] # libraries=["tcc"]
 
     print 'building'
     build_ok = False

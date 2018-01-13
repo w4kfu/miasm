@@ -163,7 +163,7 @@ class jitter:
 
     C_Gen = CGen
 
-    def __init__(self, ir_arch, jit_type="gcc"):
+    def __init__(self, ir_arch, jit_type="tcc"):
         """Init an instance of jitter.
         @ir_arch: ir instance for this architecture
         @jit_type: JiT backend to use. Available options are:

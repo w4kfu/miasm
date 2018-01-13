@@ -18,11 +18,9 @@
 #include <Python.h>
 
 #include <inttypes.h>
-#include <libtcc.h>
+#include ".\libtcc\libtcc.h"
 
 #include <stdint.h>
-
-
 
 int include_array_count = 0;
 char **include_array = NULL;
@@ -69,6 +67,29 @@ PyObject* tcc_end(PyObject* self, PyObject* args)
 	Py_INCREF(Py_None);
 	return Py_None;
 }
+
+
+#ifdef _WIN32
+char* strsep(char** stringp, const char* delim)
+{
+	char* start = *stringp;
+	char* p;
+
+	p = (start != NULL) ? strpbrk(start, delim) : NULL;
+
+	if (p == NULL)
+	{
+		*stringp = NULL;
+	}
+	else
+	{
+		*p = '\0';
+		*stringp = p + 1;
+	}
+
+	return start;
+}
+#endif
 
 PyObject* tcc_set_emul_lib_path(PyObject* self, PyObject* args)
 {
