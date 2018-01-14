@@ -88,7 +88,7 @@ def buil_all():
                     library_dirs = ['miasm2/jitter/libtcc'],
                     sources = ["miasm2/jitter/Jittcc.c"]
                     )
-        ] # libraries=["tcc"]
+        ]
 
     print 'building'
     build_ok = False
@@ -101,7 +101,15 @@ def buil_all():
                 version = '2.0',
                 packages = packages,
                 package_data = {'miasm2':['jitter/*.h',
-                                          'jitter/arch/*.h',]},
+                                          'jitter/arch/*.h', 
+                                          "jitter/lib/*", 
+                                          "jitter/runtime/include/*", 
+                                          "jitter/runtime/win32/include/*",
+                                          "jitter/runtime/win32/include/sys/*",
+                                          "jitter/runtime/win32/include/winapi/*",
+                                          "jitter/runtime/win32/include/sec_api/*",
+                                          "jitter/runtime/win32/include/sec_api/sys/*",
+                                          "jitter/runtime/win32/include/tcc/*",]},
                 ext_modules = ext_modules,
                 # Metadata
                 author = 'Fabrice Desclaux',

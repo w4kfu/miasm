@@ -2,6 +2,7 @@
 import os
 import tempfile
 from subprocess import Popen, PIPE
+import sysconfig
 
 from miasm2.jitter import Jittcc
 from miasm2.jitter.jitcore_cc_base import JitCore_Cc_Base, gen_core
@@ -28,19 +29,28 @@ class JitCore_Tcc(JitCore_Cc_Base):
         include_dir = os.path.dirname(jittcc_path)
         include_dir += ";" + os.path.join(include_dir, "arch")
 
-        # XXX HACK
-        # As debian/ubuntu have moved some include files using arch directory,
-        # TCC doesn't know them, so we get the info from CC
-        # For example /usr/include/x86_64-linux-gnu which contains limits.h
-        p = Popen(["cc", "-Wp,-v", "-E", "-"],
-                  stdout=PIPE, stderr=PIPE, stdin=PIPE)
-        p.stdin.close()
-        include_files = p.stderr.read().split('\n')
-        include_files = [x[1:]
-                         for x in include_files if x.startswith(' /usr/include')]
+        include_files = []
+        include_files.append(sysconfig.get_paths()["include"])
+        include_files.append(os.path.join(os.path.dirname(jittcc_path), "runtime", "win32", "include"))
+        include_files.append(os.path.join(os.path.dirname(jittcc_path), "runtime", "include"))
+
+        try:
+            # XXX HACK
+            # As debian/ubuntu have moved some include files using arch directory,
+            # TCC doesn't know them, so we get the info from CC
+            # For example /usr/include/x86_64-linux-gnu which contains limits.h
+            p = Popen(["cc", "-Wp,-v", "-E", "-"],
+                    stdout=PIPE, stderr=PIPE, stdin=PIPE)
+            p.stdin.close()
+            include_files = p.stderr.read().split('\n')
+            include_files = [x[1:]
+                            for x in include_files if x.startswith(' /usr/include')]
+        except Exception,ex:
+            pass
         include_files += self.include_files
         include_files = ";".join(include_files)
         Jittcc.tcc_set_emul_lib_path(include_files, libs)
+
 
     def __del__(self):
         for tcc_state in self.states.values():
@@ -87,7 +97,8 @@ class JitCore_Tcc(JitCore_Cc_Base):
         c_source += "\n".join(func_code)
 
         c_source = gen_core(ir_arch.arch, ir_arch.attrib) + c_source
-
+        return c_source
+        '''
         c_source = """
      #ifdef __x86_64__
      #ifndef __LP64__
@@ -100,5 +111,6 @@ class JitCore_Tcc(JitCore_Cc_Base):
      #endif
      #endif
      """ + "#include <Python.h>\n" + c_source
-
+    
         return c_source
+        '''

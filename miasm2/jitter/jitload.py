@@ -172,6 +172,8 @@ class jitter:
             - "llvm"
             - "python"
         """
+        print "Using jit:", jit_type
+        jit_type = "tcc"
 
         self.arch = ir_arch.arch
         self.attrib = ir_arch.attrib

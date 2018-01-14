@@ -126,14 +126,14 @@ void Resolve_dst(block_id* BlockDst, uint64_t addr, uint64_t is_local);
 
 
 
-uint8_t MEM_LOOKUP_08(JitCpu* jitcpu, uint64_t addr);
-uint16_t MEM_LOOKUP_16(JitCpu* jitcpu, uint64_t addr);
-uint32_t MEM_LOOKUP_32(JitCpu* jitcpu, uint64_t addr);
-uint64_t MEM_LOOKUP_64(JitCpu* jitcpu, uint64_t addr);
-void MEM_WRITE_08(JitCpu* jitcpu, uint64_t addr, uint8_t src);
-void MEM_WRITE_16(JitCpu* jitcpu, uint64_t addr, uint16_t src);
-void MEM_WRITE_32(JitCpu* jitcpu, uint64_t addr, uint32_t src);
-void MEM_WRITE_64(JitCpu* jitcpu, uint64_t addr, uint64_t src);
+__declspec(dllexport) uint8_t MEM_LOOKUP_08(JitCpu* jitcpu, uint64_t addr);
+__declspec(dllexport) uint16_t MEM_LOOKUP_16(JitCpu* jitcpu, uint64_t addr);
+__declspec(dllexport) uint32_t MEM_LOOKUP_32(JitCpu* jitcpu, uint64_t addr);
+__declspec(dllexport) uint64_t MEM_LOOKUP_64(JitCpu* jitcpu, uint64_t addr);
+//void MEM_WRITE_08(JitCpu* jitcpu, uint64_t addr, uint8_t src);
+//void MEM_WRITE_16(JitCpu* jitcpu, uint64_t addr, uint16_t src);
+//void MEM_WRITE_32(JitCpu* jitcpu, uint64_t addr, uint32_t src);
+//void MEM_WRITE_64(JitCpu* jitcpu, uint64_t addr, uint64_t src);
 _MIASM_EXTERN PyObject* vm_get_mem(JitCpu *self, PyObject* args);
 
 

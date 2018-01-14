@@ -13,11 +13,12 @@ def gen_core(arch, attrib):
     lib_dir = os.path.dirname(os.path.realpath(__file__))
 
     txt = ""
-    txt += '#include "%s/queue.h"\n' % lib_dir
-    txt += '#include "%s/vm_mngr.h"\n' % lib_dir
-    txt += '#include "%s/vm_mngr_py.h"\n' % lib_dir
-    txt += '#include "%s/JitCore.h"\n' % lib_dir
-    txt += '#include "%s/arch/JitCore_%s.h"\n' % (lib_dir, arch.name)
+    txt += '#include <Python.h>\n'
+    txt += '#include "%s\\queue.h"\n' % lib_dir
+    txt += '#include "%s\\vm_mngr.h"\n' % lib_dir
+    txt += '#include "%s\\vm_mngr_py.h"\n' % lib_dir
+    txt += '#include "%s\\JitCore.h"\n' % lib_dir
+    txt += '#include "%s\\arch\\JitCore_%s.h"\n' % (lib_dir, arch.name)
 
     txt += r'''
 #define RAISE(errtype, msg) {PyObject* p; p = PyErr_Format( errtype, msg ); return p;}
@@ -69,9 +70,15 @@ class JitCore_Cc_Base(JitCore):
 
     def load(self):
         lib_dir = os.path.dirname(os.path.realpath(__file__))
-        libs = [os.path.join(lib_dir, 'VmMngr.so'),
+        
+        #libs = [os.path.join(lib_dir, 'VmMngr.so'),
+        #        os.path.join(lib_dir,
+        #                     'arch/JitCore_%s.so' % (self.ir_arch.arch.name))]
+
+        libs = [os.path.join(lib_dir, 'VmMngr.pyd'),
+                os.path.join(lib_dir, 'Jitgcc.pyd'),
                 os.path.join(lib_dir,
-                             'arch/JitCore_%s.so' % (self.ir_arch.arch.name))]
+                             'arch/JitCore_%s.pyd' % (self.ir_arch.arch.name))]
 
         include_files = [os.path.dirname(__file__),
                          get_python_inc()]

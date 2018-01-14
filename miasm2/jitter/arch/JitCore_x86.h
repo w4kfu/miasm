@@ -101,26 +101,24 @@ typedef struct {
 }vm_cpu_t;
 
 
+__declspec(dllexport) void dump_gpregs_32(vm_cpu_t* vmcpu);
+__declspec(dllexport) void dump_gpregs_64(vm_cpu_t* vmcpu);
+__declspec(dllexport) uint64_t segm2addr(JitCpu* jitcpu, uint64_t segm, uint64_t addr);
 
 
-void dump_gpregs_32(vm_cpu_t* vmcpu);
-void dump_gpregs_64(vm_cpu_t* vmcpu);
-uint64_t segm2addr(JitCpu* jitcpu, uint64_t segm, uint64_t addr);
+__declspec(dllexport) uint64_t udiv64(vm_cpu_t* vmcpu, uint64_t a, uint64_t b);
+__declspec(dllexport) uint64_t umod64(vm_cpu_t* vmcpu, uint64_t a, uint64_t b);
+__declspec(dllexport) int64_t idiv64(vm_cpu_t* vmcpu, int64_t a, int64_t b);
+__declspec(dllexport) int64_t imod64(vm_cpu_t* vmcpu, int64_t a, int64_t b);
 
+__declspec(dllexport) uint32_t udiv32(vm_cpu_t* vmcpu, uint32_t a, uint32_t b);
+__declspec(dllexport) uint32_t umod32(vm_cpu_t* vmcpu, uint32_t a, uint32_t b);
+__declspec(dllexport) int32_t idiv32(vm_cpu_t* vmcpu, int32_t a, int32_t b);
+__declspec(dllexport) int32_t imod32(vm_cpu_t* vmcpu, int32_t a, int32_t b);
 
-uint64_t udiv64(vm_cpu_t* vmcpu, uint64_t a, uint64_t b);
-uint64_t umod64(vm_cpu_t* vmcpu, uint64_t a, uint64_t b);
-int64_t idiv64(vm_cpu_t* vmcpu, int64_t a, int64_t b);
-int64_t imod64(vm_cpu_t* vmcpu, int64_t a, int64_t b);
-
-uint32_t udiv32(vm_cpu_t* vmcpu, uint32_t a, uint32_t b);
-uint32_t umod32(vm_cpu_t* vmcpu, uint32_t a, uint32_t b);
-int32_t idiv32(vm_cpu_t* vmcpu, int32_t a, int32_t b);
-int32_t imod32(vm_cpu_t* vmcpu, int32_t a, int32_t b);
-
-uint16_t udiv16(vm_cpu_t* vmcpu, uint16_t a, uint16_t b);
-uint16_t umod16(vm_cpu_t* vmcpu, uint16_t a, uint16_t b);
-int16_t idiv16(vm_cpu_t* vmcpu, int16_t a, int16_t b);
-int16_t imod16(vm_cpu_t* vmcpu, int16_t a, int16_t b);
+__declspec(dllexport) uint16_t udiv16(vm_cpu_t* vmcpu, uint16_t a, uint16_t b);
+__declspec(dllexport) uint16_t umod16(vm_cpu_t* vmcpu, uint16_t a, uint16_t b);
+__declspec(dllexport) int16_t idiv16(vm_cpu_t* vmcpu, int16_t a, int16_t b);
+__declspec(dllexport) int16_t imod16(vm_cpu_t* vmcpu, int16_t a, int16_t b);
 
 #define RETURN_PC return BlockDst;

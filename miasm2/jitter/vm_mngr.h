@@ -200,7 +200,7 @@ int vm_write_mem(vm_mngr_t* vm_mngr, uint64_t addr, char *buffer, uint64_t size)
 
 #define CC_P 1
 
-extern const uint8_t parity_table[256];
+const uint8_t parity_table[256];
 #define parity(a) parity_table[(a) & 0xFF]
 
 unsigned int my_imul08(unsigned int a, unsigned int b);
@@ -311,9 +311,9 @@ void add_memory_page(vm_mngr_t* vm_mngr, struct memory_page_node* mpn);
 
 void add_mem_read(vm_mngr_t* vm_mngr, uint64_t addr, uint64_t size);
 void add_mem_write(vm_mngr_t* vm_mngr, uint64_t addr, uint64_t size);
-void check_invalid_code_blocs(vm_mngr_t* vm_mngr);
-void check_memory_breakpoint(vm_mngr_t* vm_mngr);
-void reset_memory_access(vm_mngr_t* vm_mngr);
+__declspec(dllexport) void check_invalid_code_blocs(vm_mngr_t* vm_mngr);
+__declspec(dllexport) void check_memory_breakpoint(vm_mngr_t* vm_mngr);
+__declspec(dllexport) void reset_memory_access(vm_mngr_t* vm_mngr);
 PyObject* get_memory_read(vm_mngr_t* vm_mngr);
 PyObject* get_memory_write(vm_mngr_t* vm_mngr);
 

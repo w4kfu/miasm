@@ -324,22 +324,22 @@ IMOD(16)
 IMOD(32)
 IMOD(64)
 
-void MEM_WRITE_08(JitCpu* jitcpu, uint64_t addr, uint8_t src)
+__declspec(dllexport) void MEM_WRITE_08(JitCpu* jitcpu, uint64_t addr, uint8_t src)
 {
 	vm_MEM_WRITE_08(&((VmMngr*)jitcpu->pyvm)->vm_mngr, addr, src);
 }
 
-void MEM_WRITE_16(JitCpu* jitcpu, uint64_t addr, uint16_t src)
+__declspec(dllexport) void MEM_WRITE_16(JitCpu* jitcpu, uint64_t addr, uint16_t src)
 {
 	vm_MEM_WRITE_16(&((VmMngr*)jitcpu->pyvm)->vm_mngr, addr, src);
 }
 
-void MEM_WRITE_32(JitCpu* jitcpu, uint64_t addr, uint32_t src)
+__declspec(dllexport) void MEM_WRITE_32(JitCpu* jitcpu, uint64_t addr, uint32_t src)
 {
 	vm_MEM_WRITE_32(&((VmMngr*)jitcpu->pyvm)->vm_mngr, addr, src);
 }
 
-void MEM_WRITE_64(JitCpu* jitcpu, uint64_t addr, uint64_t src)
+__declspec(dllexport) void MEM_WRITE_64(JitCpu* jitcpu, uint64_t addr, uint64_t src)
 {
 	vm_MEM_WRITE_64(&((VmMngr*)jitcpu->pyvm)->vm_mngr, addr, src);
 }
